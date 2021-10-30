@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}" >
+<head>
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Type" content="text/html;"/>	
+</head>
+<body>
+<!-- Conteúdo -->	
+	<div layout:fragment="content">
+	
+		  <form th:object="${disciplina}" th:action="@{/disciplina/save/}" method="POST">
+		  <input type="hidden" th:field="${disciplina.id}" th:if="${disciplina.id}" />
+			<h3>Cadastro de Disciplina</h3>
+			
+			<div class="form-group">
+			<div class="form-group col-md-5">
+				<label for="nome">Descrição </label>
+				   <input type="text" class="form-control" id="descricao" placeholder="Descrição"
+							autofocus="autofocus" th:field="*{descricao}"
+							th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid'" />
+			</div>
+			</div>	
+				
+			
+			<button class="btn btn-primary mb-2" type="submit">Salvar</button>
+	
+		</form>
+	</div>
+</body>
+</html>

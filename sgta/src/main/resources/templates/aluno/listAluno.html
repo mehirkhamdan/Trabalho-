@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}" >
+<head>
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Type" content="text/html;"/>
+	
+	<title>Sistema de Agenda Escolar - Lista de Alunos</title>
+</head>
+
+<body>
+		
+	<!-- Conteúdo -->
+	<div layout:fragment="content">
+	
+		<h3>Lista de Alunos</h3>
+		<table class="table table-hover">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Matrícula</th>
+					<th scope="col">Nome</th>
+					<th scope="col">Telefone</th>
+					<th>#</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="aluno : ${alunos}">
+					<td th:text="${aluno.id}"/>
+					<td>
+					<a th:href="@{/aluno/edit/{id}(id=${aluno.id})}"th:text="${aluno.matricula} "></a>
+					</td>					
+					<td th:text="${aluno.nome}"></td>
+					<td th:text="${aluno.telefone.celular}"></td>
+					 <td><a th:href="@{/aluno/delete/{id}(id=${aluno.id})}"
+                      th:attr="aria-label= ${'Delete' + aluno.id}" class="aluno-link">Delete
+                        </a></td>
+				</tr>
+				
+			</tbody>
+			
+			
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}" >
+<head>
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Type" content="text/html;"/>
+</head>
+
+<body>
+	<!-- Conteúdo -->	
+	<div layout:fragment="content">
+		<h3>Listar Disciplina</h3>
+		
+		<table class="table table-hover">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Descrição</th>
+					<th>#</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="disciplina : ${disciplinas}">
+					<td th:text="${disciplina.id}"/>
+					<td>
+					<a th:href="@{/disciplina/edit/{id}(id=${disciplina.id})}"th:text="${disciplina.descricao}"></a>
+					</td>					
+					
+					 <td><a th:href="@{/disciplina/delete/{id}(id=${disciplina.id})}"
+                      th:attr="aria-label= ${'Delete' + disciplina.id}" class="disciplina-link">Delete
+                        </a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

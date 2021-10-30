@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}" >
+<head>
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Type" content="text/html;"/>	
+</head>
+<body>
+<!-- Conteúdo -->	
+	<div layout:fragment="content">
+	
+		  <form th:object="${turma}" th:action="@{/turma/save/}" method="POST">
+		  <input type="hidden" th:field="${turma.id}" th:if="${turma.id}" />
+			<h3>Cadastro de Turma</h3>
+			
+			<div class="form-group">
+			<div class="form-group col-md-5">
+				<label for="nome">Descrição </label>
+				   <input type="text" class="form-control" id="descricao" placeholder="Descrição"
+							autofocus="autofocus" th:field="*{descricao}"
+							th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid'" />
+			</div>
+			</div>	
+			<div class="form-group">
+			<div class="form-group col-md-5">
+				<label for="nome">Ano </label>
+				   <input type="text" class="form-control" id="anoo" placeholder="Ano"
+							autofocus="autofocus" th:field="*{ano}"
+							th:classappend="${#fields.hasErrors('ano')} ? 'is-invalid'" />
+			</div>
+			</div>	
+			
+			<div class="form-group">
+			<div class="form-group col-md-5">
+				<label for="nome">Turno </label>
+				   <input type="text" class="form-control" id="turno" placeholder="Turno"
+							autofocus="autofocus" th:field="*{turno}"
+							th:classappend="${#fields.hasErrors('turno')} ? 'is-invalid'" />
+			</div>
+			</div>	
+			
+			<div class="form-group">
+					<div class="form-group col-md-5">
+						<label class="form-label" for="curso">Cursos</label> 
+ 						<select id="permissoes" name="curso" th:field="*{curso}"
+							multiple="multiple" class="form-control select2-single">
+		  					<option th:each="curso : ${curso}"
+				 			 	th:value="${curso.id}"
+				  				th:text="${curso.descricao}">	
+		  					</option>
+						</select>
+						</div>
+					</div>
+				
+			
+			<button class="btn btn-primary mb-2" type="submit">Salvar</button>
+	
+		</form>
+	</div>
+	
+	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script>
+  	$("#permissoes").select2({
+          ajax: {
+              url: '/apicurso/permissoes',
+              dataType: 'json',
+              delay: 250,
+              processResults: function (response) {
+                  $.map(response, function (obj) {
+                    obj.text = obj.text || obj.descricao; // replace name with the property used for the text
+                    return obj;
+                  });
+                  return {
+                      results: response
+                  };
+              },
+              cache: false
+          }
+      });
+      
+  </script>
+	
+</body>
+</html>

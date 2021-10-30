@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}" >
+<head>
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Type" content="text/html;"/>
+
+	<title>Sistema Escolar - Cadastro de Aluno</title>
+</head>
+
+<body>
+	<!-- Conteúdo -->
+	<div layout:fragment="content">
+	
+	
+		 <form th:object="${aluno}" th:action="@{/aluno/save/}" method="POST">
+		  <input type="hidden" th:field="${aluno.id}" th:if="${aluno.id}" />
+			<h3>Cadastro de Aluno</h3>
+			<div class="form-group">
+				<label for="nome">Matricula do Aluno</label>
+				   <input type="text" class="form-control" id="matricula" placeholder="Matricula do Aluno"
+							autofocus="autofocus" th:field="*{matricula}"
+							th:classappend="${#fields.hasErrors('matricula')} ? 'is-invalid'" />
+			</div>
+			
+				<div class="form-group">
+				<label for="nome">Nome:</label> 
+				  <input type="text" class="form-control" id="nome" placeholder="Nome Completo"
+							autofocus="autofocus" th:field="*{nome}"
+							th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label for="cpf">Cpf do Aluno</label>
+				   <input type="text" class="form-control" id="cpf" placeholder="Cpf do Aluno"
+							autofocus="autofocus" th:field="*{cpf}"
+							th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid'" />
+				</div>
+			</div>			
+				<div class="form-group">
+				<label for="nome">Telefone Aluno:</label> 
+				  <input type="text" class="form-control" id="celular" placeholder="celular"
+							autofocus="autofocus" th:field="*{telefone.celular}"
+							th:classappend="${#fields.hasErrors('telefone.celular')} ? 'is-invalid'" />
+			</div>
+			
+        	<input	type="hidden" id="telefone.id" th:field="*{telefone.id}" />
+	
+
+           <button class="btn btn-primary mb-2" type="submit">Atulaizar</button>
+           
+        
+			<br>
+		</form>
+	</div>
+
+</body>
+</html>
